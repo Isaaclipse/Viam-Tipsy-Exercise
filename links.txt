@@ -1,0 +1,37 @@
+The next step will be completing an exercise that will be discussed in one of your onsite interview sessions. Here is the link to the exercise. During the onsite, you will discuss your thought process, how you executed it, things you considered etc. Please reach out to me and Matt Vella with any questions.
+
+Notes: 
+Since you don’t have the hardware to test, we don’t expect this to be working code
+Easiest way to submit code is with a github repo
+Let us know if you have any questions. Email matt.vella@viam.com and CC amanda@viam.com. 
+
+Are you tired of constantly making trips to the fridge during a party just to replenish everyone's drinks? Are your guests tired of going to grab their own drinks? Well, now everyone can sit back and relax while Tipsy takes care of all your beer carrying needs.
+
+Tipsy consists of:
+a motorized wheeled base
+a raspberry pi
+a webcam
+One or more ultrasonic sensors
+
+Using the Viam Python SDK, write and/or improve code that includes a control loop that allows Tipsy to:
+Look for people, and move towards them using the camera and a machine learning model
+Avoid bumping into obstacles using ultrasonic sensors.  This includes both not starting movement that will create a collision, but also stopping movement when something unexpectedly enters Tipsy’s path
+Pauses near people to allow them to choose to grab drinks
+Not get “stuck” next to the same person, mingle! (but don’t over-engineer it, randomness is OK, no need to track individual people or where Tipsy has been)
+Attempt to not get stuck and/or tipping backwards when impacting an undetected object
+Make the number of ultrasonic sensors configurable, e.g. allow one to have a config variable that says it should use X number of ultrasonic sensors
+
+Resources:
+Tipsy tutorial: https://docs.viam.com/tutorials/projects/tipsy/
+Tutorial that uses a machine learning model to detect people: https://docs.viam.com/tutorials/projects/light-up/
+Tutorial that show how to programmatically drive a robotic base: https://docs.viam.com/tutorials/get-started/try-viam-sdk/
+The “Code Sample” tab in the Try Viam experience is a good starting point for coding this, but the tutorials above are, as well.  Note that the Viam rovers in the Try experience don’t have an ultrasonic sensor, so you can’t test your code there.
+Other tutorials on the docs site might also be useful
+The ultrasonic sensor is implemented as a generic sensor component, so it can use the get_readings() method, which returns a dict of key-value pairs.  For the ultrasonic, the only key is “distance” (in meters) - so the following code would print the distance in meters to the closest object.
+from viam.components.sensor import Sensor
+ultrasonic = Sensor.from_robot(robot, "ultrasonic")
+result = await ultrasonic.get_readings()
+print(result["distance"])
+
+
+
